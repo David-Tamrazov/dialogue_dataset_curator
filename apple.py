@@ -9,66 +9,63 @@ sys.setdefaultencoding('utf-8')
 
 def main():
     # url = 'https://communities.apple.com/fr/message/' + str(randint(220010632, 220039330))
-    url = 'https://communities.apple.com/de/message/200031820#200031820'
-
-    print(url)
-
+    url = 'https://communities.apple.com/de/message/200031820'
     response = urllib.urlopen(url).read()
-    # print response[:1000]
-    print "\n"
+    soup = fetch_curated_soup(response)
 
-    # print(type(response))
-    soup = BeautifulSoup.BeautifulSoup(response, "lxml")
+    
 
-    get_post_author(soup)
-    get_usernames_of_replies(soup)
+    response_list = get_responses(soup)
 
-    # # print(type(soup2))
-    # searchterm = ["j-thread-post", "all-replies-container"]
+    # xml_string = ""
 
-    # print searchterm[0]
+    # for x in xrange(1000000,2000000):
+    #     url = 'https://communities.apple.com/de/message/' + x
 
-    # for p in range(0, 2):
-    #     section = str(soup.find("div", {"class": searchterm[p]}))
-    #     soup2 = BeautifulSoup.BeautifulSoup(section, "lxml")
+    #     response = urllib.urlopen(url).read()
+    #     soup = fetch_curated_soup(response)
+    #     usernames = get_usernames(soup)
 
-    #     # print((soup3))
-    #     # print("test")
+    #     if (valid_conversation(usernames)):
+    #         write_to_xml(xml_string, soup)
+    #     else:
+    #         continue
+    
 
-    #     usernameSoup = soup.find(text='data-userid')
+def fetch_curated_soup(url_response):
+    soup = BeautifulSoup.BeautifulSoup(url_response, "lxml")
 
-    #     userSoup = soup.findAll("div", {"class": "jive-rendered-content"})  # , limit=10
+    recommendation = soup.find('div', {"class": "recommended-answers"})
+    persist = soup.find('div', {"class": "persist-question"})
 
-    #     # print usernameSoup
+    # Trim clutter from the soup 
+    if recommendation is not None:
+        recommendation.decompose()
 
-    #     length = len(userSoup)
+    if persist is not None:
+        persist.decompose()
 
-    #     # print(length)
-
-    #     for x in range(0, length):
-    #         t = userSoup[x]
-
-    #         lol = t.findAll("p")
-    #         length2 = len(lol)
-
-    #         for z in range(0, length2):
-    #             y = lol[z]
-    #             print(y.text)
-
-    #         print "\n\n"
-
-    #         # print usernames
-
-def get_post_author(soup):
-    div_data = soup.find("div", "j-post-author")
-    link_data = div_data.find("a").attrs
-    author = link_data['data-username']
-    return author
-
-def get_usernames_of_replies(soup):
-    replies = soup.findAll("a", attrs={'class': 'j-avatar'})
-    username_list = [ reply.attrs['data-username'] for reply in replies]
+    return soup 
+    
+def get_usernames(soup):
+    username_data = soup.findAll("a", attrs={'class': 'j-avatar'})
+    username_list = [ data.attrs['data-username'] for data in username_data]
     return username_list
+
+def get_responses(soup):
+    response_data = soup.findAll("div", attrs={"class": "jive-rendered-content"})
+    response_list = []
+
+    for data in response_data:
+        response_list.append(data.findAll('p', 'span', 'a', 'ul', 'ol').text)
+
+    return response_list
+
+def valid_conversation(usernames):
+    return True
+
+def write_to_xml(file_string, soup): 
+    return True
 
 if __name__ == '__main__':
     main()
