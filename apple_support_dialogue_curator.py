@@ -35,7 +35,7 @@ def main():
 
 
 
-    file = open("littytitty_eng.xml", "w")
+    file = open("curated_dataset.xml", "w")
     file.write(xml_string)
     file.close()
 
