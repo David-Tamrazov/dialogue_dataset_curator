@@ -8,32 +8,40 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 def main():
-    # url = 'https://communities.apple.com/fr/message/' + str(randint(220010632, 220039330))
-    url = 'https://communities.apple.com/de/message/200031820'
+
+    xml_string = "<dialog>\n"
+
+    for x in xrange(200031820,200032820):
+       
+        # if x == 200031830:
+        #     break
+        
+        url = 'https://communities.apple.com/de/message/' + str(x)
+
+        response = urllib.urlopen(url).read()
+        soup = fetch_curated_soup(response)
+
+        response_divs = soup.findAll("div", attrs={"class": "jive-rendered-content"})
+        username_links = soup.findAll("a", attrs={'class': 'j-avatar'})
+
+        response_list = [get_response_text(div) for div in response_divs]
+        username_list = get_usernames(username_links)
+
+        if valid_conversation(username_list):
+            xml_string += write_to_xml(response_list, username_list)+"\n"
+            # print(write_to_xml(response_list, username_list)+"\n")
+    
+    xml_string += "</dialog>"
+
+
+
+    file = open("littytitty_eng.xml", "w")
+    file.write(xml_string)
+    file.close()
+
+def fetch_curated_soup(url):
     response = urllib.urlopen(url).read()
-    soup = fetch_curated_soup(response)
-
-    
-
-    response_list = get_responses(soup)
-
-    # xml_string = ""
-
-    # for x in xrange(1000000,2000000):
-    #     url = 'https://communities.apple.com/de/message/' + x
-
-    #     response = urllib.urlopen(url).read()
-    #     soup = fetch_curated_soup(response)
-    #     usernames = get_usernames(soup)
-
-    #     if (valid_conversation(usernames)):
-    #         write_to_xml(xml_string, soup)
-    #     else:
-    #         continue
-    
-
-def fetch_curated_soup(url_response):
-    soup = BeautifulSoup.BeautifulSoup(url_response, "lxml")
+    soup = BeautifulSoup.BeautifulSoup(response, "lxml")
 
     recommendation = soup.find('div', {"class": "recommended-answers"})
     persist = soup.find('div', {"class": "persist-question"})
@@ -47,25 +55,30 @@ def fetch_curated_soup(url_response):
 
     return soup 
     
-def get_usernames(soup):
-    username_data = soup.findAll("a", attrs={'class': 'j-avatar'})
+def get_usernames(username_data):
     username_list = [ data.attrs['data-username'] for data in username_data]
     return username_list
 
-def get_responses(soup):
-    response_data = soup.findAll("div", attrs={"class": "jive-rendered-content"})
-    response_list = []
+def get_response_text(response_div):
+    response_elements = response_div.findAll(["p", "a", "span", "ul", "ol"])
 
-    for data in response_data:
-        response_list.append(data.findAll('p', 'span', 'a', 'ul', 'ol').text)
+    response = ""
 
-    return response_list
+    for element in response_elements:
+        response += element.text
+
+    return response
 
 def valid_conversation(usernames):
-    return True
+    return len(set(usernames)) > 1 and len(usernames) > 1
+        
 
-def write_to_xml(file_string, soup): 
-    return True
+def write_to_xml(response_list, username_list): 
+    output = "<s>"
+    for i in xrange(0, len(response_list)):
+        output += "<utt uid="+'"'+username_list[i]+'"'+">"+response_list[i]+"</utt>"
+    output += "</s>"    
+    return output
 
 if __name__ == '__main__':
     main()
