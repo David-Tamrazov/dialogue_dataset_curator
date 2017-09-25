@@ -9,14 +9,14 @@ sys.setdefaultencoding('utf-8')
 
 def main():
 
-    xml_string = "<dialog>" + "\n\n"
+    xml_string = "<dialog>" + "\n"
 
-    for x in xrange(200031820,200032820):
-       
-        if x == 200031830:
-            break
+    start_index = 200031820
+    iterations = 20
+    for x in xrange(0,iterations):
+        print "Progress: "+str(100*x/iterations)+"%"
         
-        url = 'https://communities.apple.com/de/message/' + str(x)
+        url = 'https://communities.apple.com/de/message/' + str((x+start_index))
         response = urllib.urlopen(url).read()
 
         soup = fetch_curated_soup(response)
@@ -66,7 +66,8 @@ def get_responses(response_divs):
         for element in response_elements:
             response += element.text
 
-        return response.replace("&", "and")
+        response = response.replace("&", "and").replace("@", "at")
+        return response
     
 
     response_list = [get_response_text(div) for div in response_divs]
@@ -80,7 +81,7 @@ def convert_to_xml(response_list, username_list):
     output = "<s>"
     for i in xrange(0, len(response_list)):
         output += "<utt uid="+'"'+username_list[i]+'"'+">"+response_list[i]+"</utt>"
-    output += "</s>" + "\n\n"  
+    output += "</s>" + "\n"  
     return output 
 
 def write_to_file(xml_string):
