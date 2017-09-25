@@ -28,16 +28,13 @@ def main():
         username_list = get_usernames(username_links)
 
         if valid_conversation(username_list):
-            xml_string += write_to_xml(response_list, username_list)+"\n"
+            xml_string += convert_to_xml(response_list, username_list)
             # print(write_to_xml(response_list, username_list)+"\n")
     
     xml_string += "</dialog>"
 
+    write_to_file(xml_string)
 
-
-    file = open("curated_dataset.xml", "w")
-    file.write(xml_string)
-    file.close()
 
 def fetch_curated_soup(url):
     response = urllib.urlopen(url).read()
@@ -67,18 +64,25 @@ def get_response_text(response_div):
     for element in response_elements:
         response += element.text
 
-    return response
+    p
+
+    return str.replace("&", "and")
 
 def valid_conversation(usernames):
     return len(set(usernames)) > 1 and len(usernames) > 1
         
 
-def write_to_xml(response_list, username_list): 
+def convert_to_xml(response_list, username_list): 
     output = "<s>"
     for i in xrange(0, len(response_list)):
         output += "<utt uid="+'"'+username_list[i]+'"'+">"+response_list[i]+"</utt>"
-    output += "</s>"    
-    return output
+    output += "</s>\n"    
+    return output 
+
+def write_to_file(xml_string):
+    file = open("curated_dataset.xml", "w")
+    file.write(xml_string)
+    file.close()
 
 if __name__ == '__main__':
     main()
