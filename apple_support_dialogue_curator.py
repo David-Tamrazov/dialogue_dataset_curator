@@ -66,7 +66,7 @@ def get_responses(response_divs):
         for element in response_elements:
             response += element.text
 
-        response = response.replace("&", "and").replace("@", "at")
+        response = response.replace("&", "_and_").replace("@", "_at_").replace("<", "_open_angle_").replace(">", "_close_angle_")
         return response
     
 
