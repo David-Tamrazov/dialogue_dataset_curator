@@ -9,38 +9,34 @@ sys.setdefaultencoding('utf-8')
 
 def main():
 
-    xml_string = "<dialog>\n"
+    xml_string = "<dialog>" + "\n\n"
 
     for x in xrange(200031820,200032820):
        
-        # if x == 200031830:
-        #     break
+        if x == 200031830:
+            break
         
         url = 'https://communities.apple.com/de/message/' + str(x)
-
         response = urllib.urlopen(url).read()
+
         soup = fetch_curated_soup(response)
 
         response_divs = soup.findAll("div", attrs={"class": "jive-rendered-content"})
         username_links = soup.findAll("a", attrs={'class': 'j-avatar'})
 
-        response_list = [get_response_text(div) for div in response_divs]
+        response_list = get_responses(response_divs)
         username_list = get_usernames(username_links)
 
         if valid_conversation(username_list):
-            xml_string += write_to_xml(response_list, username_list)+"\n"
+            xml_string += convert_to_xml(response_list, username_list)
             # print(write_to_xml(response_list, username_list)+"\n")
     
     xml_string += "</dialog>"
 
+    write_to_file(xml_string)
 
 
-    file = open("curated_dataset.xml", "w")
-    file.write(xml_string)
-    file.close()
-
-def fetch_curated_soup(url):
-    response = urllib.urlopen(url).read()
+def fetch_curated_soup(response):
     soup = BeautifulSoup.BeautifulSoup(response, "lxml")
 
     recommendation = soup.find('div', {"class": "recommended-answers"})
@@ -55,30 +51,42 @@ def fetch_curated_soup(url):
 
     return soup 
     
-def get_usernames(username_data):
-    username_list = [ data.attrs['data-username'] for data in username_data]
+def get_usernames(username_links):
+    username_list = [ data.attrs['data-username'] for data in username_links]
     return username_list
 
-def get_response_text(response_div):
-    response_elements = response_div.findAll(["p", "a", "span", "ul", "ol"])
+def get_responses(response_divs):
+    
+    # define get_response_text within get_responses scope to keep it Private 
+    def get_response_text(response_div):
+        response_elements = response_div.findAll(["p", "a", "span", "ul", "ol"])
 
-    response = ""
+        response = ""
 
-    for element in response_elements:
-        response += element.text
+        for element in response_elements:
+            response += element.text
 
-    return response
+        return response.replace("&", "and")
+    
+
+    response_list = [get_response_text(div) for div in response_divs]
+    return response_list
 
 def valid_conversation(usernames):
     return len(set(usernames)) > 1 and len(usernames) > 1
         
 
-def write_to_xml(response_list, username_list): 
+def convert_to_xml(response_list, username_list): 
     output = "<s>"
     for i in xrange(0, len(response_list)):
         output += "<utt uid="+'"'+username_list[i]+'"'+">"+response_list[i]+"</utt>"
-    output += "</s>"    
-    return output
+    output += "</s>" + "\n\n"  
+    return output 
+
+def write_to_file(xml_string):
+    file = open("curated_dataset.xml", "w")
+    file.write(xml_string)
+    file.close()
 
 if __name__ == '__main__':
     main()
