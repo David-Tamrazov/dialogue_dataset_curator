@@ -12,11 +12,12 @@ def main():
     xml_string = "<dialog>" + "\n\n"
 
     for x in xrange(200031820,200032820):
-       
+        
         if x == 200031830:
             break
         
         url = 'https://communities.apple.com/de/message/' + str(x)
+        print("Pulling html from " + url)
         response = urllib.urlopen(url).read()
 
         soup = fetch_curated_soup(response)
@@ -31,9 +32,12 @@ def main():
             xml_string += convert_to_xml(response_list, username_list)
             # print(write_to_xml(response_list, username_list)+"\n")
     
+    print("Finished pulling html data from Apple discussion boards.")
     xml_string += "</dialog>"
 
+    print("Writing to xml file...")
     write_to_file(xml_string)
+    print("Done.")
 
 
 def fetch_curated_soup(response):
@@ -53,7 +57,13 @@ def fetch_curated_soup(response):
     
 def get_usernames(username_links):
     username_list = [ data.attrs['data-username'] for data in username_links]
-    return username_list
+
+    # Make each username a generic uid that we increment with each new user in the conversation 
+    # Protects user privacy; further generalizes the data 
+    indexes = {}
+    uid_list = [indexes.setdefault(name, str(len(indexes) + 1)) for name in username_list]
+            
+    return uid_list
 
 def get_responses(response_divs):
     
@@ -66,7 +76,7 @@ def get_responses(response_divs):
         for element in response_elements:
             response += element.text
 
-        return response.replace("&", "and")
+        return response.replace("&", "_and").replace("@", "_at").replace
     
 
     response_list = [get_response_text(div) for div in response_divs]
