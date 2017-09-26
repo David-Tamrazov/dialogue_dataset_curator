@@ -12,7 +12,7 @@ def main():
     xml_string = "<dialog>" + "\n"
 
     start_index = 200031820
-    iterations = 20
+    iterations = 10
     for x in xrange(0,iterations):
         print "Progress: "+str(100*x/iterations)+"%"
         
@@ -23,10 +23,11 @@ def main():
 
         response_divs = soup.findAll("div", attrs={"class": "jive-rendered-content"})
         username_links = soup.findAll("a", attrs={'class': 'j-avatar'})
-        scores = soup.findAll("span", attrs={'class': 'js-acclaim-container'})
+        scores = soup.select("span.js-acclaim-metoo-container")+soup.findAll("span", attrs={'class': 'js-acclaim-container'})
 
         response_list = get_responses(response_divs)
         username_list = get_usernames(username_links)
+
         scores_list = get_scores(scores)
 
         if valid_conversation(username_list):
@@ -78,8 +79,9 @@ def get_responses(response_divs):
     return response_list
 
 def get_scores(scores):
-    scores_list = ['OP']
-    scores_list.extend([data.attrs['data-likes'] for data in scores])
+    # scores_list = ['OP']
+    # scores_list.extend([data.attrs['data-likes'] for data in scores])
+    scores_list = [data.attrs['data-likes'] for data in scores]
     return scores_list
 
 def valid_conversation(usernames):
