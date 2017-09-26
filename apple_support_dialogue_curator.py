@@ -23,17 +23,21 @@ def main():
 
         response_divs = soup.findAll("div", attrs={"class": "jive-rendered-content"})
         username_links = soup.findAll("a", attrs={'class': 'j-avatar'})
+        scores = soup.findAll("span", attrs={'class': 'js-acclaim-container'})
 
         response_list = get_responses(response_divs)
         username_list = get_usernames(username_links)
+        scores_list = get_scores(scores)
 
         if valid_conversation(username_list):
-            xml_string += convert_to_xml(response_list, username_list)
-            # print(write_to_xml(response_list, username_list)+"\n")
+            xml_string += convert_to_xml(response_list, username_list, scores_list)
+
+        # print xml_string
+            
     
     xml_string += "</dialog>"
-
     write_to_file(xml_string)
+    
 
 
 def fetch_curated_soup(response):
@@ -73,16 +77,30 @@ def get_responses(response_divs):
     response_list = [get_response_text(div) for div in response_divs]
     return response_list
 
+def get_scores(scores):
+    scores_list = ['OP']
+    scores_list.extend([data.attrs['data-likes'] for data in scores])
+    return scores_list
+
 def valid_conversation(usernames):
     return len(set(usernames)) > 1 and len(usernames) > 1
         
 
-def convert_to_xml(response_list, username_list): 
+def convert_to_xml(response_list, username_list, scores_list): 
     output = "<s>"
     for i in xrange(0, len(response_list)):
-        output += "<utt uid="+'"'+username_list[i]+'"'+">"+response_list[i]+"</utt>"
+        output += "<utt uid="+'"'+str(get_username_uid(username_list).index(username_list[i])+1)+'" score='+scores_list[i]+">"+response_list[i]+"</utt>"
     output += "</s>" + "\n"  
     return output 
+
+def get_username_uid(username_list):
+    uid_list = []
+    for user in username_list:
+        try:
+            uid_list.index(user)
+        except ValueError:
+            uid_list.append(user)
+    return uid_list
 
 def write_to_file(xml_string):
     file = open("curated_dataset.xml", "w")
