@@ -8,37 +8,43 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 def main():
+    file = open("curated_dataset.xml", "w")
+    # file = open("curated_dataset_plain.xml", "w")
+    file.write("<dialog>\n")
+    start_index = 200031820
+    iterations = 1000
+    for x in xrange(0,iterations):
+        # progress updates
+        show_progress(x, iterations)
 
-    xml_string = "<dialog>" + "\n\n"
-
-    for x in xrange(200031820,200032820):
-        
-        if x == 200031830:
-            break
-        
-        url = 'https://communities.apple.com/de/message/' + str(x)
-        print("Pulling html from " + url)
+        # initialize
+        url = 'https://communities.apple.com/de/message/' + str((x+start_index))
         response = urllib.urlopen(url).read()
-
         soup = fetch_curated_soup(response)
 
+        # soup-y stuff
         response_divs = soup.findAll("div", attrs={"class": "jive-rendered-content"})
         username_links = soup.findAll("a", attrs={'class': 'j-avatar'})
-
+        scores = soup.select("span.js-acclaim-metoo-container")+soup.findAll("span", attrs={'class': 'js-acclaim-container'})
         response_list = get_responses(response_divs)
         username_list = get_usernames(username_links)
+        scores_list = get_scores(scores)
 
+        # validate
         if valid_conversation(username_list):
-            xml_string += convert_to_xml(response_list, username_list)
-            # print(write_to_xml(response_list, username_list)+"\n")
+            xml_string = convert_to_xml(response_list, username_list, scores_list)
+            # xml_string = convert_to_xml_plain(response_list, username_list)
+            # write
+            file.write(xml_string)
+ 
     
-    print("Finished pulling html data from Apple discussion boards.")
-    xml_string += "</dialog>"
-
-    print("Writing to xml file...")
-    write_to_file(xml_string)
-    print("Done.")
-
+    file.write("</dialog>")
+    file.close()
+    
+def show_progress(x, iterations):
+        progress = 100*x/iterations
+        sys.stdout.write("\rProgress: %d/%d (%d%%)" % (x, iterations, progress))
+        sys.stdout.flush()
 
 def fetch_curated_soup(response):
     soup = BeautifulSoup.BeautifulSoup(response, "lxml")
@@ -76,27 +82,43 @@ def get_responses(response_divs):
         for element in response_elements:
             response += element.text
 
-        return response.replace("&", "_and").replace("@", "_at").replace
+        response = response.replace("&", "_and_").replace("@", "_at_").replace("<", "_open_angle_").replace(">", "_close_angle_")
+        return response
     
 
     response_list = [get_response_text(div) for div in response_divs]
     return response_list
 
+def get_scores(scores):
+    scores_list = [data.attrs['data-likes'] for data in scores]
+    return scores_list
+
 def valid_conversation(usernames):
     return len(set(usernames)) > 1 and len(usernames) > 1
         
 
-def convert_to_xml(response_list, username_list): 
+def convert_to_xml(response_list, username_list, scores_list): 
     output = "<s>"
     for i in xrange(0, len(response_list)):
-        output += "<utt uid="+'"'+username_list[i]+'"'+">"+response_list[i]+"</utt>"
-    output += "</s>" + "\n\n"  
+        output += "<utt uid="+'"'+str(get_username_uid(username_list).index(username_list[i])+1)+'" score="'+scores_list[i]+'">'+response_list[i]+"</utt>"
+    output += "</s>" + "\n"  
+    return output
+
+def convert_to_xml_plain(response_list, username_list): 
+    output = "<s>"
+    for i in xrange(0, len(response_list)):
+        output += "<utt uid="+'"'+str(get_username_uid(username_list).index(username_list[i])+1)+'">'+response_list[i]+"</utt>"
+    output += "</s>" + "\n"  
     return output 
 
-def write_to_file(xml_string):
-    file = open("curated_dataset.xml", "w")
-    file.write(xml_string)
-    file.close()
+def get_username_uid(username_list):
+    uid_list = []
+    for user in username_list:
+        try:
+            uid_list.index(user)
+        except ValueError:
+            uid_list.append(user)
+    return uid_list
 
 if __name__ == '__main__':
     main()
