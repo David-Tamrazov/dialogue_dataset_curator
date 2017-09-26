@@ -49,18 +49,18 @@ def extract(root):
 						count_users = int(n2.get('uid'))
 					# get OP score
 					if count_users == 1 and int(n2.get('uid')) == 1:
-						OP_score = n2.get('score')
+						OP_score = int(n2.get('score'))
 			# update stats
-			convo_lengths[index] = count_length
-			convo_users[index] = convo_users
-			OP_scores[index] = OP_score
+			convo_lengths.append(count_length)
+			convo_users.append(count_users)
+			OP_scores.append(OP_score)
 
 	return [convo_lengths, convo_users, OP_scores]
 			
 def analysis(data):
-	avg_convo_length = sum(data.convo_lengths)/len(data.convo_lengths)
-	avg_users_per_convo = sum(data.convo_users)/len(data.convo_users)
-	avg_OP_score = sum(data.OP_scores)/len(data.OP_scores)
+	avg_convo_length = float(sum(data[0])/len(data[0]))
+	avg_users_per_convo = float(sum(data[1])/len(data[1]))
+	avg_OP_score = float(sum(data[2])/len(data[2]))
 	return [avg_convo_length, avg_users_per_convo, avg_OP_score]
 
 print analysis(extract(root))
