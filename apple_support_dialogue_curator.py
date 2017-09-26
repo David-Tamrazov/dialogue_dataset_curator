@@ -82,8 +82,6 @@ def get_responses(response_divs):
     return response_list
 
 def get_scores(scores):
-    # scores_list = ['OP']
-    # scores_list.extend([data.attrs['data-likes'] for data in scores])
     scores_list = [data.attrs['data-likes'] for data in scores]
     return scores_list
 
@@ -107,10 +105,6 @@ def get_username_uid(username_list):
             uid_list.append(user)
     return uid_list
 
-def write_to_file(xml_string):
-    # file = open("curated_dataset.xml", "w")
-    file.write(xml_string)
-    # file.close()
 
 if __name__ == '__main__':
     main()
