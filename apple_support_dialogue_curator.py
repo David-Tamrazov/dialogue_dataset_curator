@@ -8,38 +8,48 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 def main():
-
-    xml_string = "<dialog>" + "\n"
-
+    file = open("curated_dataset.xml", "w")
+    # xml_string = "<dialog>\n"
+    file.write("<dialog>\n")
     start_index = 200031820
-    iterations = 10
+    iterations = 5000
     for x in xrange(0,iterations):
-        print "Progress: "+str(100*x/iterations)+"%"
-        
+        # progress updates
+        # print "Progress: "+str(100*x/iterations)+"%"
+        show_progress(x, iterations)
+
+        # initialize
+        xml_string = ""
         url = 'https://communities.apple.com/de/message/' + str((x+start_index))
         response = urllib.urlopen(url).read()
-
         soup = fetch_curated_soup(response)
 
+        # soup-y stuff
         response_divs = soup.findAll("div", attrs={"class": "jive-rendered-content"})
         username_links = soup.findAll("a", attrs={'class': 'j-avatar'})
         scores = soup.select("span.js-acclaim-metoo-container")+soup.findAll("span", attrs={'class': 'js-acclaim-container'})
-
         response_list = get_responses(response_divs)
         username_list = get_usernames(username_links)
-
         scores_list = get_scores(scores)
 
+        # validate
         if valid_conversation(username_list):
             xml_string += convert_to_xml(response_list, username_list, scores_list)
 
+        # write
+        file.write(xml_string)
         # print xml_string
             
     
-    xml_string += "</dialog>"
-    write_to_file(xml_string)
+    # xml_string += "</dialog>"
+    file.write("</dialog>")
+    # write_to_file(xml_string)
+    file.close()
     
-
+def show_progress(x, iterations):
+        progress = 100*x/iterations
+        sys.stdout.write("\rProgress: %d/%d (%d%%)" % (x, iterations, progress))
+        sys.stdout.flush()
 
 def fetch_curated_soup(response):
     soup = BeautifulSoup.BeautifulSoup(response, "lxml")
@@ -105,9 +115,9 @@ def get_username_uid(username_list):
     return uid_list
 
 def write_to_file(xml_string):
-    file = open("curated_dataset.xml", "w")
+    # file = open("curated_dataset.xml", "w")
     file.write(xml_string)
-    file.close()
+    # file.close()
 
 if __name__ == '__main__':
     main()
