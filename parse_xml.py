@@ -58,9 +58,9 @@ def extract(root):
 	return [convo_lengths, convo_users, OP_scores]
 			
 def analysis(data):
-	avg_convo_length = float(sum(data[0])/len(data[0]))
-	avg_users_per_convo = float(sum(data[1])/len(data[1]))
-	avg_OP_score = float(sum(data[2])/len(data[2]))
+	avg_convo_length = float(sum(data[0]))/float(len(data[0]))
+	avg_users_per_convo = float(sum(data[1]))/float(len(data[1]))
+	avg_OP_score = float(sum(data[2]))/float(len(data[2]))
 	return [avg_convo_length, avg_users_per_convo, avg_OP_score]
 
 print analysis(extract(root))
