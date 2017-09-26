@@ -9,9 +9,10 @@ sys.setdefaultencoding('utf-8')
 
 def main():
     file = open("curated_dataset.xml", "w")
+    # file = open("curated_dataset_plain.xml", "w")
     file.write("<dialog>\n")
     start_index = 200031820
-    iterations = 5000
+    iterations = 1000
     for x in xrange(0,iterations):
         # progress updates
         show_progress(x, iterations)
@@ -32,6 +33,7 @@ def main():
         # validate
         if valid_conversation(username_list):
             xml_string = convert_to_xml(response_list, username_list, scores_list)
+            # xml_string = convert_to_xml_plain(response_list, username_list)
             # write
             file.write(xml_string)
  
@@ -92,7 +94,14 @@ def valid_conversation(usernames):
 def convert_to_xml(response_list, username_list, scores_list): 
     output = "<s>"
     for i in xrange(0, len(response_list)):
-        output += "<utt uid="+'"'+str(get_username_uid(username_list).index(username_list[i])+1)+'" score='+scores_list[i]+">"+response_list[i]+"</utt>"
+        output += "<utt uid="+'"'+str(get_username_uid(username_list).index(username_list[i])+1)+'" score="'+scores_list[i]+'">'+response_list[i]+"</utt>"
+    output += "</s>" + "\n"  
+    return output
+
+def convert_to_xml_plain(response_list, username_list): 
+    output = "<s>"
+    for i in xrange(0, len(response_list)):
+        output += "<utt uid="+'"'+str(get_username_uid(username_list).index(username_list[i])+1)+'">'+response_list[i]+"</utt>"
     output += "</s>" + "\n"  
     return output 
 
@@ -104,7 +113,6 @@ def get_username_uid(username_list):
         except ValueError:
             uid_list.append(user)
     return uid_list
-
 
 if __name__ == '__main__':
     main()
