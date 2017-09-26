@@ -1,8 +1,20 @@
 import xml.etree.ElementTree as ET
-tree = ET.parse('curated_dataset.xml')
+import time
+import sys
+
+
+tree = ET.parse('curated_dataset copy.xml')
 root = tree.getroot()
 
 # ET.dump(root)
+
+
+
+# stats we want:
+#  - avg_convo_length
+#  - avg_users_per_convo
+#  - avg_post_per_user
+#  - avg_OP_responses
 
 
 
@@ -11,22 +23,45 @@ root = tree.getroot()
 # 	print neighbour.tag, neighbour.get('uid'), neighbour.text
 
 
-def analytics(root):
 
-	avg_convo_length = 0 # sum(convo_length)/nb_convos
-	avg_OP_responses = 0 # #_op_utt/#_utt
-	avg_post_per_user = 0
+def extract(root):
 
+	convo_lengths = []
+	convo_users = []
+	OP_scores = []
+	# V2_validation = []
+
+	index = 0
 	for n1 in root.iter():
+		# for each <s> (conversation)
 		if n1.tag == 's':
-			convo_length = 0
+			index += 1
+			count_length = 0
+			count_users = 0
+			OP_score = 0
+
+			# for each <utt> (post)
 			for n2 in n1.iter():
 				if n2.tag == 'utt':
-					convo_length+=1
-			print convo_length
+					count_length+=1
+					# count users
+					if int(n2.get('uid')) > count_users:
+						count_users = int(n2.get('uid'))
+					# get OP score
+					if count_users == 1 and int(n2.get('uid')) == 1:
+						OP_score = n2.get('score')
+			# update stats
+			convo_lengths[index] = count_length
+			convo_users[index] = convo_users
+			OP_scores[index] = OP_score
+
+	return [convo_lengths, convo_users, OP_scores]
 			
+def analysis(data):
+	avg_convo_length = sum(data.convo_lengths)/len(data.convo_lengths)
+	avg_users_per_convo = sum(data.convo_users)/len(data.convo_users)
+	avg_OP_score = sum(data.OP_scores)/len(data.OP_scores)
+	return [avg_convo_length, avg_users_per_convo, avg_OP_score]
 
-	
-
-
-analytics(root)
+print analysis(extract(root))
+ 
