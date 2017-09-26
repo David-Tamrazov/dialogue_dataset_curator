@@ -1,8 +1,6 @@
 import urllib
 import bs4 as BeautifulSoup
 
-from random import randint
-
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
