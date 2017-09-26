@@ -9,17 +9,14 @@ sys.setdefaultencoding('utf-8')
 
 def main():
     file = open("curated_dataset.xml", "w")
-    # xml_string = "<dialog>\n"
     file.write("<dialog>\n")
     start_index = 200031820
     iterations = 5000
     for x in xrange(0,iterations):
         # progress updates
-        # print "Progress: "+str(100*x/iterations)+"%"
         show_progress(x, iterations)
 
         # initialize
-        xml_string = ""
         url = 'https://communities.apple.com/de/message/' + str((x+start_index))
         response = urllib.urlopen(url).read()
         soup = fetch_curated_soup(response)
@@ -34,16 +31,12 @@ def main():
 
         # validate
         if valid_conversation(username_list):
-            xml_string += convert_to_xml(response_list, username_list, scores_list)
-
-        # write
-        file.write(xml_string)
-        # print xml_string
-            
+            xml_string = convert_to_xml(response_list, username_list, scores_list)
+            # write
+            file.write(xml_string)
+ 
     
-    # xml_string += "</dialog>"
     file.write("</dialog>")
-    # write_to_file(xml_string)
     file.close()
     
 def show_progress(x, iterations):
