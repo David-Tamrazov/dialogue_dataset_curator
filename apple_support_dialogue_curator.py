@@ -10,6 +10,7 @@ def main():
     # file = open("curated_dataset_plain.xml", "w")
     file.write("<dialog>\n")
     start_index = 200031820
+
     iterations = 1000
     for x in xrange(0,iterations):
         # progress updates
@@ -17,6 +18,13 @@ def main():
 
         # initialize
         url = 'https://communities.apple.com/de/message/' + str((x+start_index))
+
+        xml_string = "";
+        
+        # For debugging purposes- comment out when running in production environments
+        xml_string = url + "\n\n"
+
+        # Read the webpage and pull the html data from it 
         response = urllib.urlopen(url).read()
         soup = fetch_curated_soup(response)
 
@@ -30,7 +38,7 @@ def main():
 
         # validate
         if valid_conversation(username_list):
-            xml_string = convert_to_xml(response_list, username_list, scores_list)
+            xml_string += convert_to_xml(response_list, username_list, scores_list) + "\n"
             # xml_string = convert_to_xml_plain(response_list, username_list)
             # write
             file.write(xml_string)
