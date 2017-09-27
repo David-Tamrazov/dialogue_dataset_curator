@@ -74,10 +74,7 @@ Our dataset is gathered from Apple Support Community discussion boards, and woul
 %----------------------------------------------------------------------------------------
 
 \section{Dataset Description}
-The dataset was aquired  \\
-
-As the data is collected from tech support discussion boards, it contains conversations specific to troubleshooting Apple products. Most of the individual dialogue pieces consist of a question with multiple responses from various users of the Apple Support Communities. While the responses are often technical in nature, the benefit to scraping conversations from a website run on individual user input is the colloquialism in the responses. In contrast, a dataset developed from a formal setting like a FAQ would have a different type of language that would cause the automated tech support to sound robotic.
-
+The dataset is made up of posts and responses from the German Apple Support Communities. The corpus includes a variety of formats such as block quotes, links, lists, and conversational dialogue between the questioner and the respondents. The data was collected over a large range of discussion posts, approximately 13000, to ensure that many of Apple's products and services were covered. Most of the individual dialogue pieces consist of a question with multiple responses from various users of the Apple Support Communities. To be included in the dataset, each topic had to meet specific criteria to ensure its legitimacy and usefulness, that is, there must be at least one respondent.
 
 %things to discuss:
 % - stats on discussion lengths, #of users, length of posts, number of words, helpfulness ratios
@@ -93,7 +90,10 @@ As the data is collected from tech support discussion boards, it contains conver
 \section{Discussion}
 One of the key design decisions made was how were we going to define a conversation and therefore what discussion threads would make the cut for the dataset? Our initial intuition was to only include discussions with at least one instance of a response from the original poster (OP), in addition to their original post. We then revised this to at least one instance of non-consecutive posts by any user, for the inclusion of the OP does not preclude a thread from being a conversation among others.\\
 
-However, we eventually settled on the current definition of a conversation, which simply includes any thread with at least one response. While this may seem to disregard the objective of collecting data on conversations, the primary objective for this data set is to collect examples of good technical support, and one may argue that perhaps the best tech support takes the form of a singular, concise response (complexity and obscurity of the original question being a difference maker in this regard).
+However, we eventually settled on the current definition of a conversation, which simply includes any thread with at least one response. While this may seem to disregard the objective of collecting data on conversations, the primary objective for this data set is to collect examples of good technical support, and one may argue that perhaps the best tech support takes the form of a singular, concise response (complexity and obscurity of the original question being a difference maker in this regard).\\
+
+Added this to description but didn't use it, you can choose to use it or not:
+While the responses are technical in nature, the benefit to scraping conversations from a website run on individual user input is the colloquialism in the responses. In contrast, a dataset developed from a formal setting like a FAQ would have a different type of language that would cause the automated tech support to sound robotic.
 
 
 %\paragraph{}
@@ -105,7 +105,7 @@ However, we eventually settled on the current definition of a conversation, whic
 %----------------------------------------------------------------------------------------
 
 \section{Statement of Contributions}
-Thomas got the ball rolling by introducing us to the BeautifulSoup python library that played a large roll in simplifying the task from the coding side. He also wrote the initial scripts to test feasibility, and suggested sourcing our data from apple tech support pages. Upon agreeing on our objective, we then worked cooperatively to create a program that extracted the data we wanted from the pages, without double counting or skipping posts. Dave and Alex worked on optimizing Thomas's initial program, and implemented the logic for testing each discussion thread for our criteria of what defined a conversation. \\
+Thomas got the ball rolling by introducing us to the BeautifulSoup python library that played a large roll in simplifying the task from the coding side. He also wrote the initial scripts to test feasibility, and suggested sourcing our data from apple tech support pages. Upon agreeing on our objective, we then worked cooperatively to create a program that extracted the data we wanted from the pages, without double counting or skipping posts. Dave and Alex worked on optimizing Thomas' initial program, and implemented the logic for testing each discussion thread for our criteria of what defined a conversation. \\
 
 Thomas ran the program from home (approximately 7 hrs), and all three of us did some data analytics to include in the report. Alex wrote the first draft of the report, and from there everyone contributed to finalizing it for submission.\\
 
