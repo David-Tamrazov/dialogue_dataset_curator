@@ -7,7 +7,7 @@
 % http://www.LaTeXTemplates.com
 %
 % Original author:
-% Linux and Unix Users Group at Virginia Tech Wiki 
+% Linux and Unix Users Group at Virginia Tech Wiki
 % (https://vtluug.org/wiki/Example_LaTeX_chem_lab_report)
 %
 % License:
@@ -25,7 +25,7 @@
 \usepackage{siunitx} % Provides the \SI{}{} and \si{} command for typesetting SI units
 \usepackage{graphicx} % Required for the inclusion of images
 \usepackage{natbib} % Required to change bibliography style to APA
-\usepackage{amsmath} % Required for some math elements 
+\usepackage{amsmath} % Required for some math elements
 \usepackage[margin=1in]{geometry}
 \setlength\parindent{0pt} % Removes all indentation from paragraphs
 
@@ -65,7 +65,7 @@ URL: www.oururl.com
 %----------------------------------------------------------------------------------------
 
 \section{Overview}
-Our dataset is gathered from Apple Support Community discussion boards, and would be useful for training machine learning systems specifically for the task of tech support in german. The applicability of this dataset is definitely most geared towards supporting Apple-related questions, but probably can be generalized to most technical customer service platforms.
+Our dataset is gathered from Apple Support Community discussion boards, and would be useful for training machine learning systems specifically for the task of tech support in German. The applicability of this dataset is definitely most geared towards supporting Apple-related questions, but probably can be generalized to most technical customer service platforms.
 %\paragraph{}
 %\paragraph{}
 
@@ -74,7 +74,9 @@ Our dataset is gathered from Apple Support Community discussion boards, and woul
 %----------------------------------------------------------------------------------------
 
 \section{Dataset Description}
-As the data is collected from tech support discussion boards, it contains conversations specific 
+The dataset was aquired  \\
+
+As the data is collected from tech support discussion boards, it contains conversations specific to troubleshooting Apple products. Most of the individual dialogue pieces consist of a question with multiple responses from various users of the Apple Support Communities. While the responses are often technical in nature, the benefit to scraping conversations from a website run on individual user input is the colloquialism in the responses. In contrast, a dataset developed from a formal setting like a FAQ would have a different type of language that would cause the automated tech support to sound robotic.
 
 
 %things to discuss:
@@ -105,7 +107,7 @@ However, we eventually settled on the current definition of a conversation, whic
 \section{Statement of Contributions}
 Thomas got the ball rolling by introducing us to the BeautifulSoup python library that played a large roll in simplifying the task from the coding side. He also wrote the initial scripts to test feasibility, and suggested sourcing our data from apple tech support pages. Upon agreeing on our objective, we then worked cooperatively to create a program that extracted the data we wanted from the pages, without double counting or skipping posts. Dave and Alex worked on optimizing Thomas's initial program, and implemented the logic for testing each discussion thread for our criteria of what defined a conversation. \\
 
-Thomas ran the program from home (Xhrs), and all three of us did some data analytics to include in the report. Alex wrote the first draft of the report, and from there everyone contributed to finalizing it for submission.\\
+Thomas ran the program from home (approximately 7 hrs), and all three of us did some data analytics to include in the report. Alex wrote the first draft of the report, and from there everyone contributed to finalizing it for submission.\\
 
 We hereby state that all the work presented in this report is that of the authors.
 %\paragraph{}
