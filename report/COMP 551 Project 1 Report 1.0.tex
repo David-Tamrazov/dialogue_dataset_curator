@@ -113,8 +113,6 @@ The reason behind this choice was two fold. First, threads with a single respons
 To fit our the scraped data to the requisite .xml format, we made minor modifications to the extracted text. We changed all instances of '\texttt{<}' and '\texttt{>}' to '\texttt{\_open\_angle\_}' and '\texttt{\_close\_angle\_}', because they clearly would interfere with parsing xml. While parsing our corpus for basic analysis we found that the ampersand and at symbols would also provide unwanted interference, so changed them to '\texttt{\_and\_}' and \texttt{\_at\_}' respectively.
 
 \paragraph{Data Characteristics and Analysis}
-While the responses are technical in nature, the benefit to scraping conversations from a website run on individual user input is the colloquialism in the responses. In contrast, a dataset developed from a formal setting like a FAQ would have a different type of language that would cause the automated tech support to sound robotic.\\
-
 Our corpus of 13000 conversations has an average of 6.22 utterances per conversation, with the longest conversation consisting of 16 utterances. It also has an average of 2.65 users contributing to the post, with a maximum of 14 distinct users contributing to a single thread.\\
 
 Analysis of the corpus including scores reveals an average of 0.33 posts with at least one like, revealing a higher than random approval rate and only a maximum of 4 posts with at least one like in any conversation, which if anything does not speak well for the Apple support community. Meanwhile, the average OP score (other users with the same question) is 3.75, with a max of 1243.
