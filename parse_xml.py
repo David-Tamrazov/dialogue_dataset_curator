@@ -3,7 +3,7 @@ import time
 import sys
 
 
-tree = ET.parse('curated_dataset (200031820-200032987).xml')
+tree = ET.parse('curated_dataset13000.xml')
 root = tree.getroot()
 
 # ET.dump(root)
@@ -51,11 +51,11 @@ def extract(root):
 					if int(n2.get('uid')) > count_users:
 						count_users = int(n2.get('uid'))
 					# get OP score
-					if count_users == 1 and int(n2.get('uid')) == 1:
-						OP_score = int(n2.get('score'))
+					# if count_users == 1 and int(n2.get('uid')) == 1:
+					# 	OP_score = int(n2.get('score'))
 					# count posts w/ > 0 likes
-					elif int(n2.get('uid')) != 1 and int(n2.get('score')) > 0:
-						count_liked += 1
+					# elif int(n2.get('uid')) != 1 and int(n2.get('score')) > 0:
+					# 	count_liked += 1
 					# count posts_per_user
 					# for x in xrange(1,count_users):
 
