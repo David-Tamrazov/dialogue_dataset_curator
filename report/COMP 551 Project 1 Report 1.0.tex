@@ -74,7 +74,13 @@ Our dataset is gathered from Apple Support Community discussion boards, and woul
 %----------------------------------------------------------------------------------------
 
 \section{Dataset Description}
-The dataset is made up of posts and responses from the German Apple Support Communities. The corpus includes a variety of formats such as block quotes, links, lists, and conversational dialogue between the questioner and the respondents. The data was collected over a large range of discussion posts, approximately 13000, to ensure that many of Apple's products and services were covered. Most of the individual dialogue pieces consist of a question with multiple responses from various users of the Apple Support Communities. To be included in the dataset, each topic had to meet specific criteria to ensure its legitimacy and usefulness, that is, there must be at least one respondent.
+The dataset is made up of posts and responses from the German Apple Support Communities. The corpus includes a variety of formats such as block quotes, links, lists, and conversational dialogue between the questioner and the respondents. The data was collected over a large range of discussion posts, approximately 13000, to ensure that many of Apple's products and services were covered. Most of the individual dialogue pieces consist of a question with multiple responses from various users of the Apple Support Communities.\\
+
+To add to the usefulness of the dataset, we extracted \textbf{score}, a feature beyond the project specifications. Score (or the number of likes for each post), reflects the helpfulness of a response, or in the case of the he original poster (OP), whether someone else had the same question). For the sake of the assignment we are submitting two datasets:
+\begin{itemize}
+\item{$NotoriousApplePickers\_GER.xml$}
+\item{$NotoriousApplePickers\_GER\_Scores.xml$}
+\end{itemize}
 
 %things to discuss:
 % - stats on discussion lengths, #of users, length of posts, number of words, helpfulness ratios
@@ -88,13 +94,16 @@ The dataset is made up of posts and responses from the German Apple Support Comm
 %----------------------------------------------------------------------------------------
 
 \section{Discussion}
-One of the key design decisions made was how were we going to define a conversation and therefore what discussion threads would make the cut for the dataset? Our initial intuition was to only include discussions with at least one instance of a response from the original poster (OP), in addition to their original post. We then revised this to at least one instance of non-consecutive posts by any user, for the inclusion of the OP does not preclude a thread from being a conversation among others.\\
+\paragraph{Defining a Conversation}
+One of the key design decisions made was how were we going to define a conversation and therefore what discussion threads would make the cut for the dataset? Our initial intuition was to only include discussions with at least one instance of a response from the OP, in addition to their original post. We then revised this to at least one instance of non-consecutive posts by any user, for the inclusion of the OP does not preclude a thread from being a conversation among others.\\
 
 However, we eventually settled on the current definition of a conversation, which simply includes any thread with at least one response. While this may seem to disregard the objective of collecting data on conversations, the primary objective for this data set is to collect examples of good technical support, and one may argue that perhaps the best tech support takes the form of a singular, concise response (complexity and obscurity of the original question being a difference maker in this regard).\\
 
-Added this to description but didn't use it, you can choose to use it or not:
-While the responses are technical in nature, the benefit to scraping conversations from a website run on individual user input is the colloquialism in the responses. In contrast, a dataset developed from a formal setting like a FAQ would have a different type of language that would cause the automated tech support to sound robotic.
+\paragraph{Data Characteristics}
+While the responses are technical in nature, the benefit to scraping conversations from a website run on individual user input is the colloquialism in the responses. In contrast, a dataset developed from a formal setting like a FAQ would have a different type of language that would cause the automated tech support to sound robotic.\\
 
+\paragraph{Design Choices}
+To fit our the scraped data to the requisite .xml format, we made minor modifications to the extracted text. We changed all instances of '\texttt{<}' and '\texttt{>}' to '\texttt{\_open\_angle\_}' and '\texttt{\_close\_angle\_}', because they clearly would interfere with parsing xml. While parsing our corpus for basic analysis we found that the ampersand and at symbols would also provide unwanted interference, so changed them to '\texttt{\_and\_}' and \texttt{\_at\_}' respectively.
 
 %\paragraph{}
 %\paragraph{}
@@ -105,7 +114,7 @@ While the responses are technical in nature, the benefit to scraping conversatio
 %----------------------------------------------------------------------------------------
 
 \section{Statement of Contributions}
-Thomas got the ball rolling by introducing us to the BeautifulSoup python library that played a large roll in simplifying the task from the coding side. He also wrote the initial scripts to test feasibility, and suggested sourcing our data from apple tech support pages. Upon agreeing on our objective, we then worked cooperatively to create a program that extracted the data we wanted from the pages, without double counting or skipping posts. Dave and Alex worked on optimizing Thomas' initial program, and implemented the logic for testing each discussion thread for our criteria of what defined a conversation. \\
+Thomas got the ball rolling by introducing us to the BeautifulSoup python library that played a large roll in simplifying the task from the coding side. He also wrote the initial scripts to test feasibility, and suggested sourcing our data from Apple tech support pages. Upon agreeing on our objective, we then worked cooperatively to create a program that extracted the data we wanted from the pages, without double counting or skipping posts. Dave and Alex worked on optimizing Thomas' initial program, and implemented the logic for testing each discussion thread to meet our definition of a conversation. \\
 
 Thomas ran the program from home (approximately 7 hrs), and all three of us did some data analytics to include in the report. Alex wrote the first draft of the report, and from there everyone contributed to finalizing it for submission.\\
 

@@ -6,12 +6,12 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 def main():
-    file = open("curated_dataset.xml", "w")
+    start_index = 200035000
+    iterations = 5000
+    file_name = "curated_dataset ("+str(start_index)+"-"+str(start_index+iterations)+").xml"
+    file = open(file_name, "w")
     # file = open("curated_dataset_plain.xml", "w")
     file.write("<dialog>\n")
-    start_index = 200031820
-
-    iterations = 1000
     for x in xrange(0,iterations):
         # progress updates
         show_progress(x, iterations)
@@ -22,7 +22,7 @@ def main():
         xml_string = "";
         
         # For debugging purposes- comment out when running in production environments
-        xml_string = url + "\n\n"
+        # xml_string = url + "\n\n"
 
         # Read the webpage and pull the html data from it 
         response = urllib.urlopen(url).read()
