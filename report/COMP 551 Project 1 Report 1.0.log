@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  27 SEP 2017 21:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  27 SEP 2017 23:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -796,48 +796,59 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 82.
 
-Underfull \hbox (badness 10000) in paragraph at lines 87--88
+Underfull \hbox (badness 10000) in paragraph at lines 99--100
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 104--105
-
+Underfull \hbox (badness 10000) in paragraph at lines 101--102
+\OT1/cmr/m/n/10 (https://communities.apple.com/de/message/xxx
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 106--107
-\OT1/cmr/m/n/10 (https://communities.apple.com/de/message/xxx
+
  []
 
 [1
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 111--112
+Underfull \hbox (badness 10000) in paragraph at lines 108--109
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 113--114
+Underfull \hbox (badness 10000) in paragraph at lines 116--117
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 135--136
+Underfull \hbox (badness 10000) in paragraph at lines 118--119
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 137--138
+Underfull \hbox (badness 10000) in paragraph at lines 123--124
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--141
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 142--143
+
+ []
+
+[2]
 No file "COMP 551 Project 1 Report 1.0".bbl.
-[2] (./COMP 551 Project 1 Report 1.0.aux) ) 
+[3] (./COMP 551 Project 1 Report 1.0.aux) ) 
 Here is how much of TeX's memory you used:
  13528 strings out of 493089
  284342 string characters out of 6134842
- 334281 words of memory out of 5000000
+ 327281 words of memory out of 5000000
  16903 multiletter control sequences out of 15000+600000
  11537 words of font info for 44 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -851,10 +862,10 @@ ts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts
 ype1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2015/texmf-dist/fonts/typ
 e1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmtt10.pfb>
-Output written on "COMP 551 Project 1 Report 1.0.pdf" (2 pages, 111055 bytes).
+Output written on "COMP 551 Project 1 Report 1.0.pdf" (3 pages, 117264 bytes).
 PDF statistics:
- 43 PDF objects out of 1000 (max. 8388607)
- 30 compressed objects within 1 object stream
+ 46 PDF objects out of 1000 (max. 8388607)
+ 32 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

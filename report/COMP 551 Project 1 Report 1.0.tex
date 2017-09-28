@@ -58,7 +58,7 @@ Alexander Wong | alexander.wong4@mail.mcgill.ca | 260602944} % Author name
 % \end{abstract}
 
 \begin{center}
-URL: www.oururl.com
+URL: \texttt{$https://github.com/David-Tamrazov/dialogue\_dataset\_curator/tree/master/final\_data$}
 \end{center}
 \begin{multicols}{2}
 %----------------------------------------------------------------------------------------
@@ -77,16 +77,11 @@ Our dataset is gathered from Apple Support Community discussion boards, and woul
 \section{Dataset Description}
 The dataset is made up of posts and responses from the German Apple Support Communities. The corpus includes a variety of formats such as block quotes, links, lists, and conversational dialogue between the questioner and the respondents. The data was collected over a large range of discussion posts, approximately 13000, to ensure that many of Apple's products and services were covered. Most of the individual dialogue pieces consist of a question with multiple responses from various users of the Apple Support Communities.\\
 
-To add to the usefulness of the dataset, we extracted \textbf{score}, a feature beyond the project specifications. Score (or the number of likes for each post), reflects the helpfulness of a response, or in the case of the he original poster (OP), whether someone else had the same question). For the sake of the assignment we are submitting two datasets:
+To add to the usefulness of the dataset, we extracted \textbf{score}, a feature beyond the project specifications. Score (or the number of likes for each post), reflects the helpfulness of a response, or in the case of the he original poster (OP), whether someone else had the same question). This dataset contains most of the same conversations as the set of 13000, except smaller with only 6000 conversations. For the sake of the assignment we are submitting two datasets:
 \begin{itemize}
 \item{$NotoriousApplePickers\_GER.xml$}
 \item{$NotoriousApplePickers\_GER\_Scores.xml$}
 \end{itemize}
-
-\paragraph{Data Characteristics}
-While the responses are technical in nature, the benefit to scraping conversations from a website run on individual user input is the colloquialism in the responses. In contrast, a dataset developed from a formal setting like a FAQ would have a different type of language that would cause the automated tech support to sound robotic.\\
-
-
 
 %things to discuss:
 % - stats on discussion lengths, #of users, length of posts, number of words, helpfulness ratios
@@ -117,10 +112,20 @@ The reason behind this choice was two fold. First, threads with a single respons
 \paragraph{Other Design Choices}
 To fit our the scraped data to the requisite .xml format, we made minor modifications to the extracted text. We changed all instances of '\texttt{<}' and '\texttt{>}' to '\texttt{\_open\_angle\_}' and '\texttt{\_close\_angle\_}', because they clearly would interfere with parsing xml. While parsing our corpus for basic analysis we found that the ampersand and at symbols would also provide unwanted interference, so changed them to '\texttt{\_and\_}' and \texttt{\_at\_}' respectively.
 
+\paragraph{Data Characteristics and Analysis}
+While the responses are technical in nature, the benefit to scraping conversations from a website run on individual user input is the colloquialism in the responses. In contrast, a dataset developed from a formal setting like a FAQ would have a different type of language that would cause the automated tech support to sound robotic.\\
 
+Our corpus of 13000 conversations has an average of 6.22 utterances per conversation, with the longest conversation consisting of 16 utterances. It also has an average of 2.65 users contributing to the post, with a maximum of 14 distinct users contributing to a single thread.\\
 
+Analysis of the corpus including scores reveals an average of 0.33 posts with at least one like, revealing a higher than random approval rate and only a maximum of 4 posts with at least one like in any conversation, which if anything does not speak well for the Apple support community. Meanwhile, the average OP score (other users with the same question) is 3.75, with a max of 1243.
 
+\paragraph{Area for Improvement}
+One important thing we missed out on was proofing the data after scraping, specifically to ensure there were no repeated threads. While this is impossible in theory, human error in our code could still allow for this. While it may be inconsequential, such repetitions would taint the quality of the corpus.\\
 
+We also could have scraped using different definitions for a conversation, to determine which would be more helpful.
+
+\paragraph{Final Remarks}
+Suggestions we have for future users of the dataset are to filter the data to meet the your training needs; there are many ways to classify these tech support threads, for helpfulness or clarity etc. Training on the full corpus may not produce the most helpful of tech support agent.
 
 
 %\paragraph{}
