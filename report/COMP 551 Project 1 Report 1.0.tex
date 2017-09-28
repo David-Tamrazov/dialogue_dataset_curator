@@ -19,7 +19,7 @@
 %	PACKAGES AND DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 
-\documentclass[12pt]{article}
+\documentclass[10pt]{article}
 
 \usepackage[version=3]{mhchem} % Package for chemical equation typesetting
 \usepackage{siunitx} % Provides the \SI{}{} and \si{} command for typesetting SI units
@@ -28,6 +28,7 @@
 \usepackage{amsmath} % Required for some math elements
 \usepackage[margin=1in]{geometry}
 \setlength\parindent{0pt} % Removes all indentation from paragraphs
+\usepackage{multicol}
 
 \renewcommand{\labelenumi}{\alph{enumi}.} % Make numbering in the enumerate environment by letter rather than number (e.g. section 6)
 
@@ -41,7 +42,7 @@
 
 \author{
 Thomas Page | thomas.page@mail.mcgill.ca | 260771672 \\
-David Tamrazov | david.tamrazov@mail.mcgill.ca | 26XXXXXXX \\
+David Tamrazov | david.tamrazov@mail.mcgill.ca | 260561439 \\
 Alexander Wong | alexander.wong4@mail.mcgill.ca | 260602944} % Author name
 
 \date{\today} % Date for the report
@@ -59,7 +60,7 @@ Alexander Wong | alexander.wong4@mail.mcgill.ca | 260602944} % Author name
 \begin{center}
 URL: www.oururl.com
 \end{center}
-
+\begin{multicols}{2}
 %----------------------------------------------------------------------------------------
 %	SECTION 1
 %----------------------------------------------------------------------------------------
@@ -82,6 +83,11 @@ To add to the usefulness of the dataset, we extracted \textbf{score}, a feature 
 \item{$NotoriousApplePickers\_GER\_Scores.xml$}
 \end{itemize}
 
+\paragraph{Data Characteristics}
+While the responses are technical in nature, the benefit to scraping conversations from a website run on individual user input is the colloquialism in the responses. In contrast, a dataset developed from a formal setting like a FAQ would have a different type of language that would cause the automated tech support to sound robotic.\\
+
+
+
 %things to discuss:
 % - stats on discussion lengths, #of users, length of posts, number of words, helpfulness ratios
 % - graphs? word cloud/infographics?
@@ -94,16 +100,28 @@ To add to the usefulness of the dataset, we extracted \textbf{score}, a feature 
 %----------------------------------------------------------------------------------------
 
 \section{Discussion}
+\paragraph{Methodology}
+Our goal in building our dialogue curator was to provide a dataset large enough in magnitude, and diverse enough in content, to be used in training an AI responsible for automating customer support in Apple?s German discussion boards. To that end we employed the Python library BeautifulSoup4 to scrape the html data from the discussion boards, and parse the data for information on the thread that we could use to build our dialogues, such as usernames in a topic's discussion, and the text of the responses themselves. The benefit to scraping conversations from a website run on individual user input is the colloquialism in the responses. In contrast, a dataset developed from a formal setting like a FAQ would have a different type of language that would cause the automated tech support to sound robotic.\\
+
+The generic nature of Apple's discussion board URLs (https://communities.apple.com/de/message/xxx where xxx = iterated integer ID) allowed us to not only cover a wide breadth of topics, but also meant we could easily loop through a large range of URLs (13000 in our case) and build our dataset as we parsed them one by one. This kept our \texttt{apple\_dialogue\_curator.py} script simple, readable, easy to optimize, and easy to maintain.
+
+For the data analysis, we used the Python library ElementTree to easily parse through our dataset.
+
 \paragraph{Defining a Conversation}
 One of the key design decisions made was how were we going to define a conversation and therefore what discussion threads would make the cut for the dataset? Our initial intuition was to only include discussions with at least one instance of a response from the OP, in addition to their original post. We then revised this to at least one instance of non-consecutive posts by any user, for the inclusion of the OP does not preclude a thread from being a conversation among others.\\
 
-However, we eventually settled on the current definition of a conversation, which simply includes any thread with at least one response. While this may seem to disregard the objective of collecting data on conversations, the primary objective for this data set is to collect examples of good technical support, and one may argue that perhaps the best tech support takes the form of a singular, concise response (complexity and obscurity of the original question being a difference maker in this regard).\\
+However this too proved to be unsatisfactory; in the end, we settled on the current definition of a conversation, which simply includes any thread with at least one response.\\
 
-\paragraph{Data Characteristics}
-While the responses are technical in nature, the benefit to scraping conversations from a website run on individual user input is the colloquialism in the responses. In contrast, a dataset developed from a formal setting like a FAQ would have a different type of language that would cause the automated tech support to sound robotic.\\
+The reason behind this choice was two fold. First, threads with a single response allowed us to incorporate topics that could be swiftly, and succinctly concluded. It is our intuition that keeping a simpler dataset would ultimately result in a simpler, more accurate customer support model. Thus if we included datasets with at least one response, this would then incorporate all threads that had been closed in exactly one response (implying a simple problem-solution dialogue). This then feeds into the second factor behind our decision, which is that we believe the best tech support takes the form of a singular, concise response (complexity and obscurity of the original question aside). As such, we sought to provide any machine training off of our dataset with as many examples of this caliber as possible, to help guide its weights and hyper parameters in that direction.
 
-\paragraph{Design Choices}
+\paragraph{Other Design Choices}
 To fit our the scraped data to the requisite .xml format, we made minor modifications to the extracted text. We changed all instances of '\texttt{<}' and '\texttt{>}' to '\texttt{\_open\_angle\_}' and '\texttt{\_close\_angle\_}', because they clearly would interfere with parsing xml. While parsing our corpus for basic analysis we found that the ampersand and at symbols would also provide unwanted interference, so changed them to '\texttt{\_and\_}' and \texttt{\_at\_}' respectively.
+
+
+
+
+
+
 
 %\paragraph{}
 %\paragraph{}
@@ -114,9 +132,9 @@ To fit our the scraped data to the requisite .xml format, we made minor modifica
 %----------------------------------------------------------------------------------------
 
 \section{Statement of Contributions}
-Thomas got the ball rolling by introducing us to the BeautifulSoup python library that played a large roll in simplifying the task from the coding side. He also wrote the initial scripts to test feasibility, and suggested sourcing our data from Apple tech support pages. Upon agreeing on our objective, we then worked cooperatively to create a program that extracted the data we wanted from the pages, without double counting or skipping posts. Dave and Alex worked on optimizing Thomas' initial program, and implemented the logic for testing each discussion thread to meet our definition of a conversation. \\
+Thomas got the ball rolling by introducing us to the BeautifulSoup Python library that played a large roll in simplifying the task from the coding side. He also wrote the initial scripts to test feasibility, and suggested sourcing our data from Apple tech support pages. Upon agreeing on our objective, we then worked cooperatively to create a program that extracted the data we wanted from the pages, without double counting or skipping posts. Dave and Alex worked on optimizing Thomas' initial program, and implemented the logic for testing each discussion thread to meet our definition of a conversation. \\
 
-Thomas ran the program from home (approximately 7 hrs), and all three of us did some data analytics to include in the report. Alex wrote the first draft of the report, and from there everyone contributed to finalizing it for submission.\\
+Thomas ran the program from home to scrape for the main assignment corpus (approximately 7 hrs), Alex did the same for the corpus with scores (5 hrs because fewer examples), and all three of us did some data analytics to include in the report. Alex wrote the first draft of the report, and from there everyone contributed to finalizing it for submission.\\
 
 We hereby state that all the work presented in this report is that of the authors.
 %\paragraph{}
@@ -150,4 +168,5 @@ We hereby state that all the work presented in this report is that of the author
 \bibliography{sample}
 
 %----------------------------------------------------------------------------------------
+\end{multicols}
 \end{document}

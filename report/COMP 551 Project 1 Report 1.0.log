@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  27 SEP 2017 20:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  27 SEP 2017 21:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -9,8 +9,8 @@ LaTeX2e <2015/01/01>
 Babel <3.9l> and hyphenation patterns for 79 languages loaded.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-(/usr/local/texlive/2015/texmf-dist/tex/latex/base/size12.clo
-File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
 \c@section=\count80
@@ -614,39 +614,88 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layoutvoffset=\dimen172
 \Gm@dimlist=\toks22
 )
+(/usr/local/texlive/2015/texmf-dist/tex/latex/tools/multicol.sty
+Package: multicol 2015/03/31 v1.8m multicolumn formatting (FMi)
+\c@tracingmulticols=\count201
+\mult@box=\box50
+\multicol@leftmargin=\dimen173
+\c@unbalance=\count202
+\c@collectmore=\count203
+\doublecol@number=\count204
+\multicoltolerance=\count205
+\multicolpretolerance=\count206
+\full@width=\dimen174
+\page@free=\dimen175
+\premulticols=\dimen176
+\postmulticols=\dimen177
+\multicolsep=\skip73
+\multicolbaselineskip=\skip74
+\partial@page=\box51
+\last@line=\box52
+\maxbalancingoverflow=\dimen178
+\mult@rightbox=\box53
+\mult@grightbox=\box54
+\mult@gfirstbox=\box55
+\mult@firstbox=\box56
+\@tempa=\box57
+\@tempa=\box58
+\@tempa=\box59
+\@tempa=\box60
+\@tempa=\box61
+\@tempa=\box62
+\@tempa=\box63
+\@tempa=\box64
+\@tempa=\box65
+\@tempa=\box66
+\@tempa=\box67
+\@tempa=\box68
+\@tempa=\box69
+\@tempa=\box70
+\@tempa=\box71
+\@tempa=\box72
+\@tempa=\box73
+\c@columnbadness=\count207
+\c@finalcolumnbadness=\count208
+\last@try=\dimen179
+\multicolovershoot=\dimen180
+\multicolundershoot=\dimen181
+\mult@nat@firstbox=\box74
+\colbreak@box=\box75
+\mc@col@check@num=\count209
+)
 (./COMP 551 Project 1 Report 1.0.aux)
 \openout1 = `"COMP 551 Project 1 Report 1.0.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
 .................................................
 . chemgreek info: "mapping-activated"
 . 
-. Activating mapping `default' on line 49.
+. Activating mapping `default' on line 50.
 .................................................
 
 (/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count201
-\scratchdimen=\dimen173
-\scratchbox=\box50
-\nofMPsegments=\count202
-\nofMParguments=\count203
+\scratchcounter=\count210
+\scratchdimen=\dimen182
+\scratchbox=\box76
+\nofMPsegments=\count211
+\nofMParguments=\count212
 \everyMPshowfont=\toks23
-\MPscratchCnt=\count204
-\MPscratchDim=\dimen174
-\MPnumerator=\count205
-\makeMPintoPDFobject=\count206
+\MPscratchCnt=\count213
+\MPscratchDim=\dimen183
+\MPnumerator=\count214
+\makeMPintoPDFobject=\count215
 \everyMPtoPDFconversion=\toks24
 ) (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
@@ -718,12 +767,12 @@ File: siunitx-abbreviations.cfg 2015/01/21 v2.6e siunitx: Abbreviated units
 * \topmargin=-37.0pt
 * \headheight=12.0pt
 * \headsep=25.0pt
-* \topskip=12.0pt
+* \topskip=10.0pt
 * \footskip=30.0pt
-* \marginparwidth=44.0pt
-* \marginparsep=10.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
 * \columnsep=10.0pt
-* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
@@ -733,67 +782,79 @@ File: siunitx-abbreviations.cfg 2015/01/21 v2.6e siunitx: Abbreviated units
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c__siunitx_mathsf_int=\count207
-\c__siunitx_mathtt_int=\count208
+\c__siunitx_mathsf_int=\count216
+\c__siunitx_mathtt_int=\count217
 
-Underfull \hbox (badness 10000) in paragraph at lines 77--78
+Underfull \hbox (badness 10000) in paragraph at lines 78--79
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 81.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 82.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 81.
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 82.
 
-Underfull \hbox (badness 10000) in paragraph at lines 98--99
+Underfull \hbox (badness 10000) in paragraph at lines 87--88
 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 104--105
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 106--107
+\OT1/cmr/m/n/10 (https://communities.apple.com/de/message/xxx
  []
 
 [1
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 100--101
+Underfull \hbox (badness 10000) in paragraph at lines 111--112
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 103--104
+Underfull \hbox (badness 10000) in paragraph at lines 113--114
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 117--118
+Underfull \hbox (badness 10000) in paragraph at lines 135--136
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 119--120
+Underfull \hbox (badness 10000) in paragraph at lines 137--138
 
  []
 
 No file "COMP 551 Project 1 Report 1.0".bbl.
 [2] (./COMP 551 Project 1 Report 1.0.aux) ) 
 Here is how much of TeX's memory you used:
- 13417 strings out of 493089
- 282686 string characters out of 6134842
- 318864 words of memory out of 5000000
- 16796 multiletter control sequences out of 15000+600000
- 12455 words of font info for 47 fonts, out of 8000000 for 9000
+ 13528 strings out of 493089
+ 284342 string characters out of 6134842
+ 334281 words of memory out of 5000000
+ 16903 multiletter control sequences out of 15000+600000
+ 11537 words of font info for 44 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,6n,41p,10459b,416s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,6n,41p,10459b,529s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2015/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2015/texmf-dist/font
-s/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2015/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmtt12.pfb>
-Output written on "COMP 551 Project 1 Report 1.0.pdf" (2 pages, 74243 bytes).
+fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2015/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2015/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2015/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmtt10.pfb>
+Output written on "COMP 551 Project 1 Report 1.0.pdf" (2 pages, 111055 bytes).
 PDF statistics:
- 35 PDF objects out of 1000 (max. 8388607)
- 24 compressed objects within 1 object stream
+ 43 PDF objects out of 1000 (max. 8388607)
+ 30 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
